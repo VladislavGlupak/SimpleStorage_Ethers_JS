@@ -20,3 +20,7 @@ add to `package.json`
 ```
 
 and run `yarn compile`
+
+4. `yarn add ethers` - install `Ethers`
+5. `yarn add fs-extra`
+6. `node deploy.js` - deploy
