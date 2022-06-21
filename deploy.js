@@ -20,10 +20,10 @@ async function main() {
 	const contractFactory = new ethers.ContractFactory(abi, binary, wallet);
 	console.log('Deploying, please wait...');
 	const contract = await contractFactory.deploy(); // STOP here and wait when contract deployed
-	console.log(contract);
-	const deploymentReceipt = await contract.deployTransaction.wait(1);
-	console.log('Transaction receipt....');
-	console.log(deploymentReceipt);
+	// console.log(contract);
+	// const deploymentReceipt = await contract.deployTransaction.wait(1);
+	// console.log('Transaction receipt....');
+	// console.log(deploymentReceipt);
 
 	// console.log('...deploying contract with tx data...');
 	// const nonce = await wallet.getTransactionCount();
@@ -39,6 +39,17 @@ async function main() {
 	// const send_tx = await wallet.sendTransaction(tx); // sign and send
 	// await send_tx.wait(1);
 	// console.log(send_tx);
+
+	//  Get number
+	const currentNumber = await contract.retrieve();
+	console.log(`Current number is : ${currentNumber.toString()}`);
+
+	// update current number
+
+	const newNumberResponse = await contract.store('7');
+	const txReceipt = await newNumberResponse.wait(1);
+	const updatedNumber = await contract.retrieve();
+	console.log(`New current number is : ${updatedNumber.toString()}`);
 }
 
 main()
